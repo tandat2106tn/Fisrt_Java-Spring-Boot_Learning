@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.DTO.request.UserRequestDTO;
 
+import jakarta.validation.Valid;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -25,13 +27,13 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 @RequestMapping("/user")
 public class UserController {
 
-    //@PostMapping(value = "/",headers="apiKey=v1.0")
-    @RequestMapping(method = POST,path = "/",headers = "apiKey=v1.0")
-    public String addUser(@RequestBody UserRequestDTO userDTO){
+    @PostMapping(value = "/")
+    //@RequestMapping(method = POST,path = "/",headers = "apiKey=v1.0")
+    public String addUser(@Valid @RequestBody UserRequestDTO userDTO){
        return "User added"; 
     }
     @PutMapping("/{userId}")
-    public String updateUser(@PathVariable int userId, @RequestBody UserRequestDTO userDTO){
+    public String updateUser(@PathVariable int userId,@Valid @RequestBody UserRequestDTO userDTO){
         System.out.println("Request update userId" + userId);
         return "User apdated";
     }
