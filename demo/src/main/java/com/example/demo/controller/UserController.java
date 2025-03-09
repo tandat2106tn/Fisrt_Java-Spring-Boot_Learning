@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.DTO.request.UserRequestDTO;
 
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Min;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -33,22 +34,22 @@ public class UserController {
        return "User added"; 
     }
     @PutMapping("/{userId}")
-    public String updateUser(@PathVariable int userId,@Valid @RequestBody UserRequestDTO userDTO){
+    public String updateUser(@PathVariable @Min(1) int userId,@Valid @RequestBody UserRequestDTO userDTO){
         System.out.println("Request update userId" + userId);
         return "User apdated";
     }
     @PatchMapping("/{userId}")
-    public String changStatus(@PathVariable int userId,@RequestParam(required = false) boolean status){
+    public String changStatus(@PathVariable @Min(1) int userId,@RequestParam(required = false) boolean status){
         System.out.println("Request chang user status, userId" +userId);
         return "User status changed";
     }
     @DeleteMapping("/{userId}")
-    public String deleteUser(@PathVariable int userId){
+    public String deleteUser(@Min(1)@PathVariable int userId){
         System.out.println("Request delete UserId: " +userId);
         return "User deleted";
     }
     @GetMapping("/{userId}")
-    public UserRequestDTO gerUser(@PathVariable int userId)
+    public UserRequestDTO gerUser(@PathVariable @Min(1) int userId)
     {
         return new UserRequestDTO("Tan", "Dat", "phone", "email");
     }

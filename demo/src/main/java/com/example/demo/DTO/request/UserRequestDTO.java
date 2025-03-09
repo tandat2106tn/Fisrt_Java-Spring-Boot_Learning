@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.example.demo.util.PhoneNumber;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import io.micrometer.common.lang.NonNull;
@@ -21,7 +22,8 @@ public class UserRequestDTO implements Serializable {
     private String firstName;
     @NotNull(message="last name must be not null")
     private String lastName;
-    @Pattern(regexp = "^\\d{10}",message = "phone invalid format")
+    
+    @PhoneNumber
     private String phone;
     @Email(message = "email ivalid format")
     private String email;
